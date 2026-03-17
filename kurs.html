@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Юг-Ойл-Пласт • Черкесск — полный каталог</title>
+    <style>
+        /* БАЗОВЫЕ СТИЛИ (полностью рабочие) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #eef3f7;
+            padding: 24px;
+            color: #122b40;
+        }
+        .site {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 42px;
+            box-shadow: 0 30px 50px -20px #0a2f4e33;
+            overflow: hidden;
+        }
+
+        .top-brand {
+            background: #00263b;
+            color: white;
+            padding: 1.8rem 3rem;
+        }
+        .top-brand h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        .top-brand .city-badge {
+            background: #ffcf6e;
+            color: #00263b;
+            display: inline-block;
+            padding: 0.3rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* ВКЛАДКИ */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            background: #e2ecf7;
+            border-bottom: 2px solid #b7cee6;
+            padding: 0 2.5rem;
+            gap: 0.2rem;
+        }
+        .tab-button {
+            padding: 1rem 2.2rem 0.9rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: transparent;
+            border: none;
+            border-bottom: 4px solid transparent;
+            cursor: pointer;
+            color: #1e4b70;
+            transition: 0.15s;
+        }
+        .tab-button:hover {
+            background: #d3e2f2;
+            border-bottom-color: #7fa9cc;
+        }
+        .tab-button.active {
+            border-bottom-color: #003f6b;
+            color: #003052;
+            background: #f6faff;
+        }
+
+        .tab-content {
+            padding: 2.8rem 3rem;
+            background: white;
+        }
+        .tab-pane {
+            display: none;
+        }
+        .tab-pane.active-pane {
+            display: block;
+        }
+
+        /* --- О КОМПАНИИ (главный сайд) с подробным описанием --- */
+        .company-spotlight {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+        .hero-about {
+            background: linear-gradient(138deg, #ecf6ff 0%, #ffffff 80%);
+            border-radius: 44px;
+            padding: 2.2rem 2.8rem;
+            border-left: 12px solid #ffb938;
+        }
+        .hero-about h2 {
+            font-size: 2.4rem;
+            color: #00263b;
+            margin-bottom: 1rem;
+        }
+        .hero-about p {
+            font-size: 1.15rem;
+            color: #1c405e;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+        .hero-about strong {
+            color: #00355e;
+        }
+
+        .process-list {
+            background: rgba(255,255,255,0.7);
+            border-radius: 36px;
+            padding: 1.6rem 2rem;
+            margin: 1.5rem 0 0.5rem;
+            list-style-type: none;
+            border: 1px solid #c9ddf5;
+        }
+        .process-list li {
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        .process-list li::before {
+            content: "⚙️";
+            position: absolute;
+            left: 0;
+            color: #004b82;
+            font-size: 1.2rem;
+        }
+
+        .guarantee-badge {
+            background: #ffb938;
+            display: inline-block;
+            padding: 0.7rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            color: #00263b;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .company-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: space-between;
+        }
+        .highlight-item {
+            flex: 1 1 200px;
+            background: #f3f8fe;
+            border-radius: 36px;
+            padding: 2rem 1.2rem;
+            text-align: center;
+            border: 1px solid #c5d9f0;
+        }
+        .highlight-item .emoji {
+            font-size: 2.6rem;
+            margin-bottom: 0.6rem;
+        }
+
+        /* --- ПРОДУКЦИЯ (РАСШИРЕННЫЙ КАТАЛОГ) --- */
+        .product-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+        }
+        .product-section-title {
+            font-size: 2rem;
+            color: #00263b;
+            border-bottom: 4px solid #ffcf6e;
+            display: inline-block;
+            padding-bottom: 6px;
+            margin-bottom: 0.5rem;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.8rem;
+        }
+        .product-item {
+            background: #f2f8ff;
+            border-radius: 32px;
+            padding: 1.8rem 1rem;
+            text-align: center;
+            border: 1px solid #c7dbef;
+            transition: all 0.15s;
+            box-shadow: 0 4px 10px rgba(0,40,70,0.03);
+        }
+        .product-item:hover {
+            border-color: #ffb938;
+            background: #fef9ed;
+            transform: scale(1.01);
+        }
+        .product-item h3 {
+            font-size: 1.6rem;
+            color: #00355c;
+            line-height: 1.3;
+        }
+        .product-badge {
+            background: #d9e8f7;
+            color: #002842;
+            border-radius: 60px;
+            padding: 0.3rem 1rem;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin: 0.6rem 0 0.2rem;
+        }
+        .product-dim {
+            font-size: 0.95rem;
+            color: #2f577b;
+            margin-top: 0.5rem;
+        }
+
+        .extra-group {
+            margin-top: 2rem;
+            background: #e7f0fa;
+            border-radius: 44px;
+            padding: 1.8rem 2.2rem;
+        }
+        .extra-group h4 {
+            font-size: 1.7rem;
+            color: #003157;
+            margin-bottom: 1.2rem;
+        }
+        .compact-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.5rem;
+        }
+        .compact-list span {
+            background: white;
+            padding: 0.5rem 1.4rem;
+            border-radius: 40px;
+            border: 1px solid #adc9e7;
+            font-weight: 500;
+        }
+
+        /* ТЕХНОЛОГИИ */
+        .tech-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .tech-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            background: #eaf2fb;
+            border-radius: 44px;
+            padding: 2rem 2.2rem;
+        }
+        .tech-icon {
+            font-size: 3.2rem;
+            min-width: 80px;
+        }
+        .tech-desc h3 {
+            font-size: 1.9rem;
+            color: #00346b;
+        }
+
+        /* КОНТАКТЫ (обновленные: адрес Демиденко 159Д, телефон 21-44-44) */
+        .contacts-block {
+            background: #e8f0fa;
+            border-radius: 56px;
+            padding: 2.5rem 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            border: 2px solid #caddf0;
+        }
+        .contact-info {
+            flex: 2;
+            min-width: 300px;
+        }
+        .contact-info h3 {
+            font-size: 2.4rem;
+            color: #00263b;
+            margin-bottom: 2rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.3rem;
+            margin-bottom: 2rem;
+            font-size: 1.25rem;
+        }
+        .contact-icon {
+            background: #00263b;
+            color: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+        }
+        .contact-detail a {
+            text-decoration: none;
+            color: #00447c;
+            font-weight: 500;
+            border-bottom: 1px dashed;
+        }
+        .contact-detail a:hover {
+            color: #001f36;
+        }
+        .worktime {
+            margin-top: 1rem;
+            font-size: 1.15rem;
+        }
+        .map-mock {
+            flex: 1;
+            min-width: 240px;
+            background: #bed6f0;
+            border-radius: 48px;
+            padding: 2rem 1.8rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border: 3px solid white;
+            font-size: 1.2rem;
+        }
+        .map-mock span {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .footer-note {
+            background: #d3e3f2;
+            padding: 1.3rem 3rem;
+            text-align: center;
+            color: #1b4462;
+            border-top: 2px solid #b1cbe5;
+        }
+    </style>
+</head>
+<body>
+<div class="site">
+    <div class="top-brand">
+        <h1>Юг-Ойл-Пласт</h1>
+        <div class="city-badge">г. Черкесск — полный ассортимент</div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-button active" data-tab="company">О компании</button>
+        <button class="tab-button" data-tab="products">Продукция</button>
+        <button class="tab-button" data-tab="tech">Технологии</button>
+        <button class="tab-button" data-tab="contacts">Контакты</button> <!-- Название вкладки исправлено -->
+    </div>
+
+    <div class="tab-content">
+        <!-- Вкладка О КОМПАНИИ -->
+        <div class="tab-pane active-pane" id="company">
+            <div class="company-spotlight">
+                <div class="hero-about">
+                    <h2>⚡ Поликарбонат — универсальный строительный пластик</h2>
+                    <p><strong>Поликарбонат</strong> – универсальный строительный пластик, принадлежащий к классу синтетических полимеров. Материал является отличной заменой для хрупкого и ненадежного стекла, подвергающегося неблагоприятному воздействию осадков и других внешних факторов.</p>
+                    <p>Изготовление монолитного или сотового поликарбоната – сложный технический процесс, требующий использования специального оборудования. За основу берутся гранулы из угольной кислоты и двухатомного фенола. Они могут быть цветными или прозрачными – от этого зависит, непосредственно, цвет готовых листов.</p>
+                    
+                    <div style="font-weight: 600; margin-top: 1.5rem; font-size: 1.2rem;">При производстве поликарбоната «Юг-Ойл-Пласт» осуществляется ряд стадий:</div>
+                    <ul class="process-list">
+                        <li>отправка гранул в центрифугу для очистки от пыли;</li>
+                        <li>подготовка сырья в парильной камере, получение единой массы;</li>
+                        <li>формирование структурных листов (в случае, если необходимо создание ячеистого поликарбоната);</li>
+                        <li>нанесение специальной плёнки, защищающей поверхность листов от воздействия прямых солнечных лучей;</li>
+                        <li>придание необходимой твёрдости и гладкости заготовке посредством пресса;</li>
+                        <li>резка, сверление, получение листов;</li>
+                        <li>проверка готовой продукции на соответствие нормам качества и безопасности.</li>
+                    </ul>
+                    <p style="margin-top: 1rem;">Наш завод в Краснодаре и склад в Черкесске гарантируют полное соблюдение технологии. Мы предлагаем стандартные и нестандартные форматы листов с доставкой по КЧР и югу России.</p>
+
+                    <div class="guarantee-badge">✅ ГАРАНТИЯ ДО 10 ЛЕТ</div>
+                </div>
+
+                <div class="company-highlights">
+                    <div class="highlight-item"><div class="emoji">🏭</div><h4>Завод в Краснодаре</h4><p>экструзионные линии</p></div>
+                    <div class="highlight-item"><div class="emoji">📦</div><h4>Склад в Черкесске</h4><p>ул. Демиденко, 159Д</p></div> <!-- Краткий адрес в подсказке -->
+                    <div class="highlight-item"><div class="emoji">🧊🔥</div><h4>от –40 до +120</h4><p>термостойкость</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Вкладка ПРОДУКЦИЯ (ПОЛНЫЙ КАТАЛОГ) -->
+        <div class="tab-pane" id="products">
+            <div class="product-showcase">
+                <div>
+                    <div class="product-section-title">Сотовый поликарбонат</div>
+                    <div class="product-grid">
+                        <div class="product-item"><h3>Сотовый 4 мм</h3><div class="product-badge">прозрачный/бронза/синий</div><div class="product-dim">2.1×6 м / 2.1×12 м</div></div>
+                        <div class="product-item"><h3>Сотовый 6 мм</h3><div class="product-badge">3 цвета</div><div class="product-dim">210×600 см</div></div>
+                        <div class="product-item"><h3>Сотовый 8 мм</h3><div class="product-badge">усиленный 3-слойный</div><div class="product-dim">210×600 см</div></div>
+                        <div class="product-item"><h3>Сотовый 10 мм</h3><div class="product-badge">многокамерный</div><div class="product-dim">210×600 см</div></div>
+                        <div class="product-item"><h3>Сотовый 16 мм</h3><div class="product-badge">5-слойный</div><div class="product-dim">210×600 см / под заказ</div></div>
+                        <div class="product-item"><h3>Сотовый 20 мм</h3><div class="product-badge">X-структура</div><div class="product-dim">нестандарт</div></div>
+                        <div class="product-item"><h3>Сотовый 25 мм</h3><div class="product-badge">повышенная прочность</div><div class="product-dim">210×600 см</div></div>
+                        <div class="product-item"><h3>Сотовый 32 мм</h3><div class="product-badge">для ангаров</div><div class="product-dim">210×600 см</div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="product-section-title">Монолитный поликарбонат</div>
+                    <div class="product-grid">
+                        <div class="product-item"><h3>Монолитный 2 мм</h3><div class="product-badge">глянец/матовый</div><div class="product-dim">205×305 см</div></div>
+                        <div class="product-item"><h3>Монолитный 3 мм</h3><div class="product-badge">ударопрочный</div><div class="product-dim">205×305 см</div></div>
+                        <div class="product-item"><h3>Монолитный 4 мм</h3><div class="product-badge">защита УФ</div><div class="product-dim">205×305 см</div></div>
+                        <div class="product-item"><h3>Монолитный 5 мм</h3><div class="product-badge">антивандальный</div><div class="product-dim">205×305 см</div></div>
+                        <div class="product-item"><h3>Монолитный 6 мм</h3><div class="product-badge">структурный</div><div class="product-dim">205×305 см</div></div>
+                        <div class="product-item"><h3>Монолитный 8 мм</h3><div class="product-badge">пуленепробиваемый</div><div class="product-dim">205×305 см</div></div>
+                        <div class="product-item"><h3>Монолитный 10 мм</h3><div class="product-badge">для спецзадач</div><div class="product-dim">205×305 см</div></div>
+                        <div class="product-item"><h3>Монолитный 12 мм</h3><div class="product-badge">повышенная толщина</div><div class="product-dim">205×305 см</div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="product-section-title">Специальные материалы</div>
+                    <div class="product-grid">
+                        <div class="product-item"><h3>Сотовый полипропилен</h3><div class="product-badge">гофропластик</div><div class="product-dim">листы 150×300 см · лёгкий</div></div>
+                        <div class="product-item"><h3>Полипропилен 4 мм</h3><div class="product-badge">гофрокартон пластик</div><div class="product-dim">для рекламы/упаковки</div></div>
+                        <div class="product-item"><h3>Полипропилен 5 мм</h3><div class="product-badge">жёсткий</div><div class="product-dim">150×300 см</div></div>
+                        <div class="product-item"><h3>Полипропилен 6 мм</h3><div class="product-badge">конструкционный</div><div class="product-dim">150×300 см</div></div>
+                        <div class="product-item"><h3>Сотовый "Титан"</h3><div class="product-badge">многокамерный</div><div class="product-dim">усиленная структура</div></div>
+                        <div class="product-item"><h3>"Титан" 10 мм</h3><div class="product-badge">5 стенок</div><div class="product-dim">210×600 см</div></div>
+                        <div class="product-item"><h3>"Титан" 16 мм</h3><div class="product-badge">X-образный</div><div class="product-dim">210×600 см</div></div>
+                        <div class="product-item"><h3>Профилированный</h3><div class="product-badge">для кровли</div><div class="product-dim">трапеция 18/76</div></div>
+                        <div class="product-item"><h3>Цветной (RAL)</h3><div class="product-badge">синий, зелёный, красный</div><div class="product-dim">под заказ</div></div>
+                    </div>
+                </div>
+
+                <div class="extra-group">
+                    <h4>🔩 Плёнки, комплектующие и аксессуары</h4>
+                    <div class="compact-list">
+                        <span>защитная плёнка</span><span>соединительный профиль</span><span>торцевая лента</span>
+                        <span>термошайбы</span><span>алюминиевый профиль</span><span>уплотнители</span>
+                        <span>крепеж</span><span>перфорированная лента</span><span>парниковый профиль</span>
+                    </div>
+                </div>
+                <div style="margin-top:1rem; color:#2f4f73;">✂️ резка в размер, доставка по Черкесску и КЧР</div>
+            </div>
+        </div>
+
+        <!-- Вкладка ТЕХНОЛОГИИ -->
+        <div class="tab-pane" id="tech">
+            <div class="tech-showcase">
+                <div class="tech-row"><div class="tech-icon">⚙️</div><div class="tech-desc"><h3>Экструзия ПК и ПП</h3><p>Линии производства сотовых и монолитных листов, соэкструзия УФ-слоя.</p></div></div>
+                <div class="tech-row"><div class="tech-icon">🧪</div><div class="tech-desc"><h3>Лабораторный контроль</h3><p>Испытания на прочность, светопропускание, термостойкость (ГОСТ).</p></div></div>
+                <div class="tech-row"><div class="tech-icon">📏</div><div class="tech-desc"><h3>Индивидуальный раскрой</h3><p>Склад в Черкесске: резка нестандартных форматов под заказ.</p></div></div>
+            </div>
+        </div>
+
+        <!-- Вкладка КОНТАКТЫ (обновленные данные: Демиденко 159Д, телефон 21-44-44) -->
+        <div class="tab-pane" id="contacts">
+            <div class="contacts-block">
+                <div class="contact-info">
+                    <h3>Контакты в Черкесске</h3>
+                    <div class="contact-item"><span class="contact-icon">📞</span><div class="contact-detail"><a href="tel:+78782214444">+7 (8782) 21-44-44</a> (многоканальный)</div></div> <!-- Номер обновлен -->
+                    <div class="contact-item"><span class="contact-icon">📱</span><div class="contact-detail"><a href="tel:+79283334455">+7 (928) 333-44-55</a> — отдел продаж</div></div>
+                    <div class="contact-item"><span class="contact-icon">✉️</span><div class="contact-detail"><a href="mailto:cherkessk@ug-plast.ru">cherkessk@ug-plast.ru</a></div></div>
+                    <div class="contact-item"><span class="contact-icon">📍</span><div class="contact-detail">г. Черкесск, ул. Демиденко, 159Д (склад)</div></div> <!-- Адрес обновлен -->
+                    <div class="contact-item"><span class="contact-icon">🕒</span><div class="contact-detail">Пн–Пт 9:00–18:00, Сб 10:00–15:00</div></div>
+                    <div class="worktime">✅ Самовывоз, доставка по городу и районам КЧР.</div>
+                </div>
+                <div class="map-mock">
+                    <span>🗺️</span>
+                    <strong>Склад на карте</strong><br>
+                    ул. Демиденко, 159Д (восточный въезд)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        © Юг-Ойл-Пласт • Черкесск | учебный сайт по материалам ug-plast.ru
+    </div>
+</div>
+
+<!-- Переключение вкладок -->
+<script>
+    (function() {
+        const buttons = document.querySelectorAll('.tab-button');
+        const panes = {
+            company: document.getElementById('company'),
+            products: document.getElementById('products'),
+            tech: document.getElementById('tech'),
+            contacts: document.getElementById('contacts')
+        };
+        function activate(tabId) {
+            buttons.forEach(btn => btn.classList.remove('active'));
+            Object.values(panes).forEach(p => p.classList.remove('active-pane'));
+            const activeBtn = Array.from(buttons).find(btn => btn.dataset.tab === tabId);
+            if (activeBtn) activeBtn.classList.add('active');
+            if (panes[tabId]) panes[tabId].classList.add('active-pane');
+        }
+        buttons.forEach(btn => btn.addEventListener('click', (e) => activate(e.target.dataset.tab)));
+        activate('company');
+    })();
+</script>
+</body>
+</html>
